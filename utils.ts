@@ -209,5 +209,19 @@ export function rectangle(name: string): LayerCommand {
  * Shortcut for "Open an app" command (of which there are a bunch)
  */
 export function app(name: string): LayerCommand {
+  if (name === 'DBeaver') {
+    return focusApp(name);
+  }
   return open(`-a '${name}.app'`);
+}
+
+export function focusApp(name: string): LayerCommand {
+  return {
+    to: [
+      {
+        shell_command: `osascript -e 'tell application "${name}" to activate'`,
+      },
+    ],
+    description: `Focus on ${name}`,
+  };
 }

@@ -70,15 +70,20 @@ const rules: KarabinerRules[] = [
     },
     // o = "Open" applications
     o: {
+      x: app("Microsoft Excel"),
+      a: app("UHK Agent"),
       1: app("1Password"),
       g: app("Google Chrome"),
-      c: app("Notion Calendar"),
+      //c: app("Notion Calendar"),
+      i: app("IntelliJ IDEA CE"),
       v: app("Visual Studio Code"),
-      d: app("Discord"),
       s: app("Slack"),
-      e: app("Superhuman"),
       n: app("Notion"),
-      t: app("Terminal"),
+      t: app("iterm"),
+      e: app("Microsoft Outlook"),
+      d: app('Docker Desktop'),
+      p: app('Postman'),
+      b: app('DBeaver'),
       // Open todo list managed via *H*ypersonic
       h: open(
         "notion://www.notion.so/stellatehq/7b33b924746647499d906c55f89d5026"
@@ -87,13 +92,14 @@ const rules: KarabinerRules[] = [
       // "M"arkdown (Obsidian.md)
       m: app("Obsidian"),
       f: app("Finder"),
-      r: app("Texts"),
       // "i"Message
-      i: app("Texts"),
-      p: app("Spotify"),
-      a: app("iA Presenter"),
+      //i: app("Texts"),
+      //: app("Spotify"),
+      //a: app("iA Presenter"),
       // "W"hatsApp has been replaced by Texts
       w: open("Texts"),
+      c: app("ChatGPT"),
+      r: app("Cursor"),
       l: open(
         "raycast://extensions/stellate/mxstbr-commands/open-mxs-is-shortlink"
       ),
@@ -115,6 +121,7 @@ const rules: KarabinerRules[] = [
     // },
 
     // w = "Window" via rectangle.app
+    // window includes tab switching and display switching (with rectangle)
     w: {
       semicolon: {
         description: "Window: Hide",
@@ -125,13 +132,44 @@ const rules: KarabinerRules[] = [
           },
         ],
       },
-      y: rectangle("previous-display"),
-      o: rectangle("next-display"),
-      k: rectangle("top-half"),
-      j: rectangle("bottom-half"),
-      h: rectangle("left-half"),
-      l: rectangle("right-half"),
-      f: rectangle("maximize"),
+      period: rectangle("center-half"),
+      n: rectangle("maximize"),
+      7: rectangle("previous-display"),
+      8: rectangle("next-display"),
+      y: {
+        description: "Window: New Tab",
+        to: [
+          {
+            key_code: "t",
+            modifiers: ["right_command"],
+          },
+        ],
+      },
+      o: {
+        description: "Window: Delete Tab",
+        to: [
+          {
+            key_code: "w",
+            modifiers: ["right_command"],
+          },
+        ],
+      },
+      //k: rectangle("top-half"),
+      j: rectangle("first-third"),
+      k: rectangle("center-third"),
+      l: rectangle("last-third"),
+      m: rectangle("left-half"),
+      0: rectangle("last-two-thirds"),
+      comma: rectangle('right-half'),
+      spacebar: {
+        description: "unmaximize or maximize",
+        to: [
+          {
+            key_code: "f",
+            modifiers: ["right_command", "right_control"],
+          },
+        ],
+      },
       u: {
         description: "Window: Previous Tab",
         to: [
@@ -150,15 +188,15 @@ const rules: KarabinerRules[] = [
           },
         ],
       },
-      n: {
-        description: "Window: Next Window",
-        to: [
-          {
-            key_code: "grave_accent_and_tilde",
-            modifiers: ["right_command"],
-          },
-        ],
-      },
+      // n: {
+      //   description: "Window: Next Window",
+      //   to: [
+      //     {
+      //       key_code: "grave_accent_and_tilde",
+      //       modifiers: ["right_command"],
+      //     },
+      //   ],
+      // },
       b: {
         description: "Window: Back",
         to: [
@@ -169,21 +207,117 @@ const rules: KarabinerRules[] = [
         ],
       },
       // Note: No literal connection. Both f and n are already taken.
-      m: {
-        description: "Window: Forward",
-        to: [
-          {
-            key_code: "close_bracket",
-            modifiers: ["right_command"],
-          },
-        ],
-      },
+      // n: {
+      //   description: "Window: Forward",
+      //   to: [
+      //     {
+      //       key_code: "close_bracket",
+      //       modifiers: ["right_command"],
+      //     },
+      //   ],
+      // },
       d: {
-        description: "Window: Next display",
+        description: "Windo: Next display",
         to: [
           {
             key_code: "right_arrow",
             modifiers: ["right_control", "right_option", "right_command"],
+          },
+        ],
+      },
+    },
+
+    e: {
+      j: {
+        to: [{ key_code: "left_arrow",
+               modifiers: ["right_command"],
+         }],
+      },
+      l: {
+        to: [{ key_code: "right_arrow",
+               modifiers: ["right_command"],
+         }],
+      },
+      h: {
+        to: [{ key_code: "m",
+               modifiers: ["right_control", "right_shift", "right_command"],
+         }],
+      },
+      0: {
+        to: [{ key_code: "0",
+               modifiers: ["right_command"],
+         }],
+        },
+      9: {
+      to: [{ key_code: "1",
+              modifiers: ["right_command"],
+        }],
+    },
+  },
+    // o = "C'o'mmand"
+    v: {
+      j: {
+        to: [{ key_code: "left_arrow" }],
+      },
+      k: {
+        to: [{ key_code: "down_arrow" }],
+      },
+      i: {
+        to: [{ key_code: "up_arrow" }],
+      },
+      l: {
+        to: [{ key_code: "right_arrow" }],
+      },
+    },
+
+    
+
+    l: {
+      s: {
+        to: [
+          {
+            key_code: "s",
+            modifiers: ["right_command"]
+          },
+        ],
+      },
+      a: {
+        to: [
+          {
+            key_code: "a",
+            modifiers: ["right_command"]
+          },
+        ],
+      },
+      x: {
+        to: [
+          {
+            key_code: "x",
+            modifiers: ["right_command"]
+          },
+        ],
+      },
+      c: {
+        to: [
+          {
+            key_code: "c",
+            modifiers: ["right_command"]
+          },
+        ],
+      },
+      v: {
+        to: [
+          {
+            key_code: "v",
+            modifiers: ["right_command"]
+          },
+        ],
+      },
+      z: {
+        to: [
+          {
+            key_code: "z",
+            modifiers: ["right_command"]
           },
         ],
       },
@@ -255,37 +389,52 @@ const rules: KarabinerRules[] = [
 
     // v = "moVe" which isn't "m" because we want it to be on the left hand
     // so that hjkl work like they do in vim
-    v: {
-      h: {
-        to: [{ key_code: "left_arrow" }],
+    f: {
+      // j: {
+      //   to: [{ key_code: "left_arrow" }],
+      // },
+      // k: {
+      //   to: [{ key_code: "down_arrow" }],
+      // },
+      // l: {
+      //   to: [{ key_code: "up_arrow" }],
+      // },
+      // semicolon: {
+      //   to: [{ key_code: "right_arrow" }],
+      // },
+      j: {// Scroll mode via homerow.app
+        to: [{ key_code: "f", modifiers: ["right_control", "right_shift", "right_command"] }],
       },
-      j: {
-        to: [{ key_code: "down_arrow" }],
+      u: {
+        to: [{ key_code: "home" }],
       },
-      k: {
-        to: [{ key_code: "up_arrow" }],
+      o: {
+        to: [{ key_code: "end" }],
       },
-      l: {
-        to: [{ key_code: "right_arrow" }],
-      },
-      // Magicmove via homerow.app
-      m: {
-        to: [{ key_code: "f", modifiers: ["right_control"] }],
-        // TODO: Trigger Vim Easymotion when VSCode is focused
-      },
-      // Scroll mode via homerow.app
       s: {
         to: [{ key_code: "j", modifiers: ["right_control"] }],
       },
       d: {
         to: [{ key_code: "d", modifiers: ["right_shift", "right_command"] }],
       },
-      u: {
+      h: {
         to: [{ key_code: "page_down" }],
       },
-      i: {
+      y: {
         to: [{ key_code: "page_up" }],
       },
+    },
+
+    delete_or_backspace: {
+      //zoom unmute/mute
+      j: {
+        to: [{ key_code: "a", modifiers: ["right_shift", "right_command"] }],
+      },
+      //zoom camera on/off
+      k: {
+        to: [{ key_code: "v", modifiers: ["right_shift", "right_command"] }],
+      },
+      
     },
 
     // c = Musi*c* which isn't "m" because we want it to be on the left hand
